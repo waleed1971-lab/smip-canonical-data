@@ -1,6 +1,11 @@
 name: Repository integrity attestation
 on:
   workflow_dispatch:
+    inputs:
+      snapshot_commit:
+        description: Exact data commit to verify and attest; defaults to current main HEAD
+        required: false
+        type: string
 concurrency:
   group: repository-integrity-attestation
   cancel-in-progress: false
@@ -15,14 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Bind attestation to the exact main commit
+        id: target
+        env:
+          REQUESTED_COMMIT: ${{ inputs.snapshot_commit }}
+        run: |
+          target="${REQUESTED_COMMIT:-${GITHUB_SHA}}"
+          test "$target" = "$GITHUB_SHA"
+          test "${#target}" -eq 40
+          echo "commit=$target" >> "$GITHUB_OUTPUT"
       - name: Check out the exact snapshot commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ steps.target.outputs.commit }}
           fetch-depth: 1
       - name: Run verifier tests
         run: python3 -m unittest scripts/test_verify_repository_integrity.py
       - name: Verify all parts and reconstruct canonical
+        env:
+          GITHUB_SHA: ${{ steps.target.outputs.commit }}
         run: |
           python3 scripts/verify_repository_integrity.py \
             --root . \
@@ -47,7 +63,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Publish PASS receipt to the default branch
         env:
-          SOURCE_COMMIT_SHA: ${{ github.sha }}
+          SOURCE_COMMIT_SHA: ${{ steps.target.outputs.commit }}
         run: |
           test -s repository-integrity-receipt.json
           grep -Fq '"verification_type": "repository-side integrity attestation"' repository-integrity-receipt.json
