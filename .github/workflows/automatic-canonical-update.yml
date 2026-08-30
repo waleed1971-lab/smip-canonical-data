@@ -1,0 +1,102 @@
+name: Automatic canonical snapshot update
+
+on:
+  schedule:
+    - cron: "45 15 * * 0-4"
+    - cron: "55 15 * * 0-4"
+  workflow_dispatch:
+
+concurrency:
+  group: automatic-canonical-snapshot-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update:
+    name: Pull, verify, publish, and request attestation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out current public snapshot
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Run update and receipt contract tests
+        run: |
+          python3 -m unittest \
+            scripts/test_update_from_public_source.py \
+            scripts/test_verify_repository_integrity.py
+
+      - name: Pull and stage the public source snapshot
+        id: update
+        run: |
+          python3 scripts/update_from_public_source.py \
+            --root . \
+            --result automatic-update-result.json \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Verify staged snapshot and allowed changes
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          python3 scripts/validate_text_parts.py
+          GITHUB_SHA="0000000000000000000000000000000000000000" \
+            GITHUB_RUN_ID="${GITHUB_RUN_ID}" \
+            python3 scripts/verify_repository_integrity.py \
+              --root . \
+              --output /tmp/precommit-receipt.json
+          git status --short
+          test -z "$(git status --short | grep -Ev '^( M| D|\?\?) (canonical-daily\.csv\.gz|manifest\.json|parts/|automatic-update-result\.json)' || true)"
+          test -z "$(git status --short repository-integrity-receipt.json)"
+
+      - name: Publish verified data commit
+        if: steps.update.outputs.changed == 'true'
+        id: publish
+        run: |
+          rm -f automatic-update-result.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add canonical-daily.csv.gz manifest.json parts
+          git commit -m "Update canonical snapshot through ${GITHUB_RUN_ID}"
+          data_commit="$(git rev-parse HEAD)"
+          git push origin HEAD:main
+          echo "data_commit=$data_commit" >> "$GITHUB_OUTPUT"
+
+      - name: Request signed repository-side attestation
+        if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DATA_COMMIT: ${{ steps.publish.outputs.data_commit }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/repository-integrity-attestation.yml/dispatches" \
+            --data "{\"ref\":\"main\",\"inputs\":{\"snapshot_commit\":\"${DATA_COMMIT}\"}}"
+
+      - name: Record deterministic update result
+        if: always()
+        env:
+          CHANGED: ${{ steps.update.outputs.changed }}
+          CHANGE_TYPE: ${{ steps.update.outputs.change_type }}
+          SOURCE_SESSION: ${{ steps.update.outputs.source_session }}
+          DATA_COMMIT: ${{ steps.publish.outputs.data_commit }}
+        run: |
+          {
+            echo "## SMIP automatic canonical update"
+            echo
+            echo "- Source: public research-read-only endpoints"
+            echo "- Source last session: ${SOURCE_SESSION:-unavailable}"
+            echo "- Data changed: ${CHANGED:-false}"
+            echo "- Change type: ${CHANGE_TYPE:-none}"
+            echo "- Data commit: ${DATA_COMMIT:-none}"
+            echo "- Attestation: requested only after a verified data commit"
+            echo "- Failure policy: fail-closed; last PASS receipt remains authoritative"
+            echo "- Research state: unchanged; NO_PROVEN_EDGE"
+          } >> "$GITHUB_STEP_SUMMARY"
