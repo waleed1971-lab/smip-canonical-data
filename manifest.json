@@ -304,5 +304,160 @@
     },
     "name": "SMIP preserved baseline and SMIP-X SAHMK TASI archive"
   },
-  "symbol_count": 287
+  "symbol_count": 287,
+  "canonical_text": {
+    "encoding": "utf-8",
+    "line_ending": "LF",
+    "size_bytes": 54941844,
+    "sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
+    "row_count": 392269,
+    "header": [
+      "symbol",
+      "date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "value_traded",
+      "trades_count",
+      "is_final",
+      "partial",
+      "source_layer",
+      "source_run_id",
+      "source_file_sha256"
+    ]
+  },
+  "text_parts": [
+    {
+      "year": 2019,
+      "path": "parts/canonical-2019.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2019.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 5994116,
+      "sha256": "2ed8a96ef519dc3370e1b1facb986bfa35a3b68cb675d954cccb167cc6177b86",
+      "row_count": 44457,
+      "symbol_count": 173,
+      "first_session": "2019-01-01",
+      "last_session": "2019-12-31",
+      "includes_header": true
+    },
+    {
+      "year": 2020,
+      "path": "parts/canonical-2020.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2020.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 6040219,
+      "sha256": "381d07014cd2f51e4c4c269350bba85c433414014638e4185d3f59297a5eac8f",
+      "row_count": 44699,
+      "symbol_count": 183,
+      "first_session": "2020-01-01",
+      "last_session": "2020-12-31",
+      "includes_header": true
+    },
+    {
+      "year": 2021,
+      "path": "parts/canonical-2021.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2021.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 6329772,
+      "sha256": "c2b0ae4bc570f71520fdc98ec40c2d208f3c5067007f74b2d2f75dc191e06570",
+      "row_count": 46743,
+      "symbol_count": 189,
+      "first_session": "2021-01-03",
+      "last_session": "2021-12-30",
+      "includes_header": true
+    },
+    {
+      "year": 2022,
+      "path": "parts/canonical-2022.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2022.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 6574677,
+      "sha256": "7170bf0537b368cb08ffdae94dfd496c1d82b8fa65f00197b348765f249f39a1",
+      "row_count": 48738,
+      "symbol_count": 207,
+      "first_session": "2022-01-02",
+      "last_session": "2022-12-29",
+      "includes_header": true
+    },
+    {
+      "year": 2023,
+      "path": "parts/canonical-2023.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2023.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 6676810,
+      "sha256": "03a8b9549fbf7f82c36c225b27495ffd4926e7f478be2567e8f93215794acb8a",
+      "row_count": 49876,
+      "symbol_count": 222,
+      "first_session": "2023-01-01",
+      "last_session": "2023-12-31",
+      "includes_header": true
+    },
+    {
+      "year": 2024,
+      "path": "parts/canonical-2024.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2024.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 8031647,
+      "sha256": "44dcfee7dc3a5d2b30a55602e488f1c00a0a24fb7a76e5ee38fe773a1ee67ae9",
+      "row_count": 56018,
+      "symbol_count": 231,
+      "first_session": "2024-01-01",
+      "last_session": "2024-12-31",
+      "includes_header": true
+    },
+    {
+      "year": 2025,
+      "path": "parts/canonical-2025.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2025.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 8669853,
+      "sha256": "fff0ca8675e917736b6080e4b746318429abaeec3378d501b3094e2106975caf",
+      "row_count": 59866,
+      "symbol_count": 250,
+      "first_session": "2025-01-01",
+      "last_session": "2025-12-31",
+      "includes_header": true
+    },
+    {
+      "year": 2026,
+      "path": "parts/canonical-2026.csv",
+      "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026.csv",
+      "encoding": "utf-8",
+      "content_type": "text/csv; charset=utf-8",
+      "size_bytes": 6625646,
+      "sha256": "7b418a552537bfdc8b733ab3148f9fcb51b6b06e86ea21d25033caba09437305",
+      "row_count": 41872,
+      "symbol_count": 287,
+      "first_session": "2026-01-01",
+      "last_session": "2026-08-27",
+      "includes_header": true
+    }
+  ],
+  "text_parts_reconstruction": {
+    "part_read_order": "ascending year",
+    "canonical_row_order": [
+      "symbol",
+      "date"
+    ],
+    "procedure": [
+      "Read every part as UTF-8 CSV and keep one copy of the common header.",
+      "Collect every data row from all parts without changing its field bytes.",
+      "Sort the collected rows ascending by symbol, then date.",
+      "Write the common header followed by the sorted original row bytes using LF line endings.",
+      "The reconstructed UTF-8 bytes must match canonical_text.sha256 and canonical_text.size_bytes."
+    ],
+    "expected_sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
+    "expected_size_bytes": 54941844,
+    "expected_row_count": 392269,
+    "automatic_update_enabled": false
+  }
 }
