@@ -116,7 +116,26 @@ def build_receipt(root: Path, context: WorkflowContext) -> dict[str, Any]:
 
     expected_limit = reconstruction.get("max_part_size_bytes_exclusive")
     require(isinstance(expected_limit, int) and expected_limit > 0, "invalid part-size limit")
-    require(reconstruction.get("automatic_update_enabled") is False, "automatic update must remain disabled")
+    automatic_update_enabled = reconstruction.get("automatic_update_enabled")
+    require(isinstance(automatic_update_enabled, bool), "automatic update flag must be boolean")
+    automatic_update = manifest.get("automatic_update")
+    if automatic_update_enabled:
+        require(isinstance(automatic_update, dict), "automatic update metadata is missing")
+        require(automatic_update.get("enabled") is True, "automatic update metadata is not enabled")
+        require(automatic_update.get("mode") == "github-actions-public-pull", "unexpected automatic update mode")
+        require(
+            automatic_update.get("source_manifest_url")
+            == "https://smip-server.onrender.com/research/manifest.json",
+            "unexpected automatic update manifest source",
+        )
+        require(
+            automatic_update.get("source_canonical_url")
+            == "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
+            "unexpected automatic update canonical source",
+        )
+        require(automatic_update.get("fail_closed") is True, "automatic update is not fail-closed")
+    else:
+        require(automatic_update is None or automatic_update.get("enabled") is False, "disabled automatic update metadata conflicts")
 
     canonical_rows: list[tuple[tuple[str, str], bytes]] = []
     receipt_parts: list[dict[str, Any]] = []
@@ -292,10 +311,11 @@ def build_receipt(root: Path, context: WorkflowContext) -> dict[str, Any]:
             "last_session": manifest.get("last_session"),
             "status": "PASS",
         },
+        "automatic_update": automatic_update,
         "policy": {
             "fail_closed": True,
             "consumer_side_byte_verification": "NOT_PERFORMED",
-            "automatic_update_enabled": False,
+            "automatic_update_enabled": automatic_update_enabled,
             "research_state_changed": False,
             "a_s_l_changed": False,
             "discovery_only_started": False,

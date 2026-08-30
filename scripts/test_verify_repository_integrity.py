@@ -109,6 +109,27 @@ class RepositoryIntegrityReceiptTest(unittest.TestCase):
         self.assertEqual(receipt["reconstruction"]["row_count"], 2)
         self.assertEqual(receipt["reconstruction"]["last_session"], "2026-01-01")
         self.assertEqual(receipt["text_parts"]["items"][0]["sha256"], sha256(self.part_payload))
+        self.assertFalse(receipt["policy"]["automatic_update_enabled"])
+
+    def test_accepts_enabled_automatic_update_with_allow_listed_public_source(self) -> None:
+        self.manifest["text_parts_reconstruction"]["automatic_update_enabled"] = True
+        self.manifest["automatic_update"] = {
+            "enabled": True,
+            "mode": "github-actions-public-pull",
+            "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json",
+            "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
+            "fail_closed": True,
+        }
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
+        receipt = build_receipt(self.root, self.context)
+        self.assertTrue(receipt["policy"]["automatic_update_enabled"])
+        self.assertEqual(receipt["automatic_update"]["mode"], "github-actions-public-pull")
+
+    def test_enabled_automatic_update_without_metadata_fails_closed(self) -> None:
+        self.manifest["text_parts_reconstruction"]["automatic_update_enabled"] = True
+        (self.root / "manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
+        with self.assertRaisesRegex(VerificationError, "metadata is missing"):
+            build_receipt(self.root, self.context)
 
     def test_tamper_fails_and_does_not_replace_last_pass_receipt(self) -> None:
         output = self.root / "repository-integrity-receipt.json"

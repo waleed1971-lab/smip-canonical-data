@@ -7,15 +7,11 @@
 | `manifest.json` | إصدار البيانات، وقت إنشاء snapshot، أول وآخر جلسة، عدد الصفوف والرموز، schema، وسياسة منع leakage |
 | `canonical-daily.csv.gz` | البيانات اليومية المضغوطة بصيغة CSV |
 | `parts/canonical-YYYY-MM.csv` | نفس صفوف canonical مقسمة حسب الشهر كنص UTF-8، وكل ملف أقل من 1 MB |
+| `repository-integrity-receipt.json` | إيصال PASS صغير يربط snapshot المفحوص بالـcommit وتشغيل GitHub والبصمات التفصيلية |
 
 ## النسخة الحالية
 
-- Dataset version: `smip-canonical-daily-v1-326b35b2b527b9a1`
-- First session: `2019-01-01`
-- Last session: `2026-08-27`
-- Rows: `392269`
-- Symbols: `287`
-- SHA256: `326b35b2b527b9a111d2d2ec89dcb394faf8ca989386cbd6fcb274ac4dfe90ac`
+القيم المتغيرة مثل `dataset_version` و`last_session` و`row_count` و`symbol_count` وSHA256 تُقرأ دائمًا من `manifest.json`، ثم تُطابق مع `repository-integrity-receipt.json`. لا تُستخدم أرقام ثابتة من README كعقد بيانات.
 
 يجب تنزيل `manifest.json` أولاً، ثم تنزيل الملف المضغوط ومطابقة SHA256 قبل استخدامه. إذا لم تتطابق البصمة، تتوقف العملية `fail-closed` ولا يبدأ أي بحث.
 
@@ -33,7 +29,15 @@
 
 لا يلزم تخمين الأسماء؛ تُستخدم روابط `url` بالترتيب الظاهر داخل `text_parts` في manifest.
 
-لإعادة تركيب النص canonical حرفيًا: تُقرأ كل الأجزاء مع الاحتفاظ بنسخة واحدة من الـheader، ثم تُجمع صفوف البيانات الأصلية وتُرتب تصاعديًا حسب `symbol` ثم `date` قبل كتابتها بسطر LF. يجب أن تطابق النتيجة `canonical_text.sha256` و`canonical_text.size_bytes` في manifest. التحديث الآلي للمستودع **غير مفعل** حتى ينجح الاختبار end-to-end من بيئة المتابعة.
+لإعادة تركيب النص canonical حرفيًا: تُقرأ كل الأجزاء مع الاحتفاظ بنسخة واحدة من الـheader، ثم تُجمع صفوف البيانات الأصلية وتُرتب تصاعديًا حسب `symbol` ثم `date` قبل كتابتها بسطر LF. يجب أن تطابق النتيجة `canonical_text.sha256` و`canonical_text.size_bytes` في manifest.
+
+## التحديث الآلي
+
+التحديث الآلي **مفعل** عبر GitHub Actions بعد نجاح اختبار Repository-side integrity gate من بيئة المتابعة. يعمل مرتين احتياطيتين في أيام التداول السعودية، الساعة 18:45 و18:55 بتوقيت الرياض. يسحب فقط مساري البحث العامين للقراءة من `smip-server.onrender.com` ولا يحتاج Token أو سرًا جديدًا.
+
+التسلسل ثابت: تنزيل manifest وcanonical، فحص المصدر وSHA256 والـschema ومنع leakage، إثبات أن التاريخ القديم لم يتغير وأن الصفوف الجديدة لاحقة فقط، بناء الأجزاء الشهرية، التحقق وإعادة البناء، ثم commit للبيانات. بعد ذلك فقط يُشغّل workflow مستقل على commit البيانات نفسه لإصدار attestation موقّع ونشر إيصال PASS. إذا لم توجد جلسة أحدث فلا ينشأ commit. وإذا فشل أي فحص، لا تُنشر بيانات جديدة ولا يتغير آخر إيصال PASS.
+
+هذا الإثبات هو `Repository-side integrity attestation`، وليس `consumer-side byte verification`. يبدأ المستهلك من الإيصال، ويربط `commit_sha` و`workflow.run_id`، ثم يطابق manifest وfreshness قبل أي بحث.
 
 ## Schema
 
