@@ -4,7 +4,8 @@ import csv
 import gzip
 import hashlib
 import json
-from collections import defaultdict
+import re
+from collections import Counter
 from pathlib import Path
 
 
@@ -13,6 +14,10 @@ CANONICAL = ROOT / "canonical-daily.csv.gz"
 MANIFEST = ROOT / "manifest.json"
 PARTS_DIR = ROOT / "parts"
 RAW_BASE = "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main"
+MAX_PART_SIZE_BYTES = 1_000_000
+PART_NAME = re.compile(
+    r"canonical-(?P<period>20\d{2}-(?:0[1-9]|1[0-2]))(?:-part(?P<part>\d{2}))?\.csv"
+)
 
 
 def sha256_file(path: Path) -> str:
@@ -21,6 +26,85 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def split_oversized_month(path: Path, header: bytes) -> None:
+    if path.stat().st_size < MAX_PART_SIZE_BYTES:
+        return
+
+    lines = path.read_bytes().splitlines(keepends=True)
+    if not lines or lines[0] != header:
+        raise SystemExit(f"invalid monthly header: {path}")
+
+    part_number = 1
+    target = PARTS_DIR / f"{path.stem}-part{part_number:02d}.csv"
+    handle = target.open("wb")
+    handle.write(header)
+    size = len(header)
+    try:
+        for line in lines[1:]:
+            if size + len(line) >= MAX_PART_SIZE_BYTES and size > len(header):
+                handle.close()
+                part_number += 1
+                target = PARTS_DIR / f"{path.stem}-part{part_number:02d}.csv"
+                handle = target.open("wb")
+                handle.write(header)
+                size = len(header)
+            handle.write(line)
+            size += len(line)
+    finally:
+        handle.close()
+    path.unlink()
+
+
+def inspect_part(path: Path) -> dict[str, object]:
+    match = PART_NAME.fullmatch(path.name)
+    if not match:
+        raise SystemExit(f"invalid part filename: {path.name}")
+    period = match.group("period")
+    part_index = int(match.group("part") or "1")
+    row_count = 0
+    symbols: set[str] = set()
+    first_session: str | None = None
+    last_session: str | None = None
+
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            session = row["date"]
+            if session[:7] != period:
+                raise SystemExit(f"row outside declared month: {path}")
+            row_count += 1
+            symbols.add(row["symbol"])
+            first_session = session if first_session is None else min(first_session, session)
+            last_session = session if last_session is None else max(last_session, session)
+
+    size_bytes = path.stat().st_size
+    if size_bytes >= MAX_PART_SIZE_BYTES:
+        raise SystemExit(
+            f"monthly part {path.name} is {size_bytes} bytes; expected < {MAX_PART_SIZE_BYTES}"
+        )
+    if row_count == 0 or first_session is None or last_session is None:
+        raise SystemExit(f"empty monthly part: {path}")
+
+    return {
+        "period": period,
+        "year": int(period[:4]),
+        "month": int(period[5:7]),
+        "part_index": part_index,
+        "path": f"parts/{path.name}",
+        "url": f"{RAW_BASE}/parts/{path.name}",
+        "encoding": "utf-8",
+        "content_type": "text/csv; charset=utf-8",
+        "size_bytes": size_bytes,
+        "max_size_bytes_exclusive": MAX_PART_SIZE_BYTES,
+        "sha256": sha256_file(path),
+        "row_count": row_count,
+        "symbol_count": len(symbols),
+        "first_session": first_session,
+        "last_session": last_session,
+        "includes_header": True,
+    }
 
 
 def main() -> None:
@@ -34,11 +118,7 @@ def main() -> None:
     for old_part in PARTS_DIR.glob("canonical-*.csv"):
         old_part.unlink()
 
-    handles: dict[int, object] = {}
-    row_counts: dict[int, int] = defaultdict(int)
-    symbols: dict[int, set[str]] = defaultdict(set)
-    first_sessions: dict[int, str] = {}
-    last_sessions: dict[int, str] = {}
+    handles: dict[str, object] = {}
     canonical_text_digest = hashlib.sha256()
     canonical_text_size = 0
     header = b""
@@ -56,46 +136,30 @@ def main() -> None:
                 row = next(csv.reader([decoded]))
                 if len(row) != len(manifest["schema"]):
                     raise SystemExit(f"schema mismatch at canonical row {line_number + 1}")
-                symbol, session = row[0], row[1]
-                year = int(session[:4])
-                if year not in handles:
-                    path = PARTS_DIR / f"canonical-{year}.csv"
+                period = row[1][:7]
+                if period not in handles:
+                    path = PARTS_DIR / f"canonical-{period}.csv"
                     handle = path.open("wb")
                     handle.write(header)
-                    handles[year] = handle
-                handles[year].write(line)
-                row_counts[year] += 1
-                symbols[year].add(symbol)
-                first_sessions.setdefault(year, session)
-                last_sessions[year] = session
+                    handles[period] = handle
+                handles[period].write(line)
     finally:
         for handle in handles.values():
             handle.close()
 
-    total_rows = sum(row_counts.values())
+    for path in sorted(PARTS_DIR.glob("canonical-????-??.csv")):
+        split_oversized_month(path, header)
+
+    parts = [inspect_part(path) for path in PARTS_DIR.glob("canonical-*.csv")]
+    parts.sort(key=lambda item: (str(item["period"]), int(item["part_index"])))
+    period_part_counts = Counter(str(item["period"]) for item in parts)
+    for item in parts:
+        item["part_count_for_period"] = period_part_counts[str(item["period"])]
+
+    total_rows = sum(int(item["row_count"]) for item in parts)
     if total_rows != manifest["row_count"]:
         raise SystemExit(
             f"text part rows {total_rows} do not match manifest {manifest['row_count']}"
-        )
-
-    parts = []
-    for year in sorted(row_counts):
-        path = PARTS_DIR / f"canonical-{year}.csv"
-        parts.append(
-            {
-                "year": year,
-                "path": f"parts/{path.name}",
-                "url": f"{RAW_BASE}/parts/{path.name}",
-                "encoding": "utf-8",
-                "content_type": "text/csv; charset=utf-8",
-                "size_bytes": path.stat().st_size,
-                "sha256": sha256_file(path),
-                "row_count": row_counts[year],
-                "symbol_count": len(symbols[year]),
-                "first_session": first_sessions[year],
-                "last_session": last_sessions[year],
-                "includes_header": True,
-            }
         )
 
     manifest["canonical_text"] = {
@@ -108,8 +172,14 @@ def main() -> None:
     }
     manifest["text_parts"] = parts
     manifest["text_parts_reconstruction"] = {
-        "part_read_order": "ascending year",
+        "partitioning": "calendar month; oversized months use numbered subparts",
+        "filename_patterns": [
+            "parts/canonical-YYYY-MM.csv",
+            "parts/canonical-YYYY-MM-partNN.csv",
+        ],
+        "part_read_order": "ascending period, then part_index",
         "canonical_row_order": ["symbol", "date"],
+        "max_part_size_bytes_exclusive": MAX_PART_SIZE_BYTES,
         "procedure": [
             "Read every part as UTF-8 CSV and keep one copy of the common header.",
             "Collect every data row from all parts without changing its field bytes.",
@@ -130,9 +200,11 @@ def main() -> None:
     print(
         json.dumps(
             {
-                "years": sorted(row_counts),
+                "periods": sorted(period_part_counts),
+                "period_count": len(period_part_counts),
                 "parts": len(parts),
                 "rows": total_rows,
+                "max_part_size_bytes": max(int(item["size_bytes"]) for item in parts),
                 "canonical_text_sha256": canonical_text_digest.hexdigest(),
                 "canonical_text_size": canonical_text_size,
             },

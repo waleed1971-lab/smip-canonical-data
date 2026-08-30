@@ -6,7 +6,7 @@
 |---|---|
 | `manifest.json` | إصدار البيانات، وقت إنشاء snapshot، أول وآخر جلسة، عدد الصفوف والرموز، schema، وسياسة منع leakage |
 | `canonical-daily.csv.gz` | البيانات اليومية المضغوطة بصيغة CSV |
-| `parts/canonical-YYYY.csv` | نفس صفوف canonical مقسمة حسب السنة كنص UTF-8 للموصلات التي لا تقرأ gzip الثنائي |
+| `parts/canonical-YYYY-MM.csv` | نفس صفوف canonical مقسمة حسب الشهر كنص UTF-8، وكل ملف أقل من 1 MB |
 
 ## النسخة الحالية
 
@@ -21,18 +21,17 @@
 
 ## الأجزاء النصية
 
-يحتوي `manifest.json` على مصفوفة `text_parts` التي تسجل لكل سنة رابط GitHub raw، وعدد الصفوف والرموز، وأول وآخر جلسة، والحجم، وSHA256. يمكن قراءة الأجزاء مباشرة:
+يحتوي `manifest.json` على مصفوفة `text_parts` التي تسجل لكل شهر رابط GitHub raw، وعدد الصفوف والرموز، وأول وآخر جلسة، والحجم، وSHA256. يوجد **92 شهرًا في 94 ملفًا**؛ شُطر شهرا يوليو وأغسطس 2026 إلى جزأين مرقمين لأن الملف الشهري المفرد تجاوز حد 1 MB. أكبر جزء منشور حجمه **999,947 بايت**.
 
-| السنة | الرابط |
-|---|---|
-| 2019 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2019.csv` |
-| 2020 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2020.csv` |
-| 2021 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2021.csv` |
-| 2022 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2022.csv` |
-| 2023 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2023.csv` |
-| 2024 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2024.csv` |
-| 2025 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2025.csv` |
-| 2026 | `https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026.csv` |
+نمط الرابط المعتاد:
+
+`https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-YYYY-MM.csv`
+
+وعند وجود جزء فرعي:
+
+`https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-YYYY-MM-partNN.csv`
+
+لا يلزم تخمين الأسماء؛ تُستخدم روابط `url` بالترتيب الظاهر داخل `text_parts` في manifest.
 
 لإعادة تركيب النص canonical حرفيًا: تُقرأ كل الأجزاء مع الاحتفاظ بنسخة واحدة من الـheader، ثم تُجمع صفوف البيانات الأصلية وتُرتب تصاعديًا حسب `symbol` ثم `date` قبل كتابتها بسطر LF. يجب أن تطابق النتيجة `canonical_text.sha256` و`canonical_text.size_bytes` في manifest. التحديث الآلي للمستودع **غير مفعل** حتى ينجح الاختبار end-to-end من بيئة المتابعة.
 
