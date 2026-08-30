@@ -1,0 +1,308 @@
+{
+  "auth_scope": "research-read-only",
+  "canonical_file": {
+    "bytes": 6683390,
+    "media_type": "application/gzip",
+    "name": "canonical-daily.csv.gz",
+    "sha256": "326b35b2b527b9a111d2d2ec89dcb394faf8ca989386cbd6fcb274ac4dfe90ac"
+  },
+  "completeness": {
+    "conflicting_duplicate_rows": 0,
+    "gap_fill_applied": false,
+    "historical_prices_recalculated": false,
+    "identical_duplicate_rows_dropped": 0,
+    "missing_values_by_column": {
+      "close": 0,
+      "high": 0,
+      "is_final": 392269,
+      "low": 0,
+      "open": 0,
+      "partial": 392269,
+      "trades_count": 392269,
+      "value_traded": 243814,
+      "volume": 0
+    }
+  },
+  "dataset_version": "smip-canonical-daily-v1-326b35b2b527b9a1",
+  "first_session": "2019-01-01",
+  "generated_at": "2026-08-29T16:36:38.736567+00:00",
+  "input_fingerprint": "fa84eccecb5f7a18842491d1a89cd1d71d3a34c5fc616ae2bd46019f87c154e8",
+  "last_session": "2026-08-27",
+  "leakage_policy": {
+    "adjusted_close_included": false,
+    "baseline_mapping": {
+      "close": "cur_price",
+      "volume": "volume_raw"
+    },
+    "forbidden_columns": [
+      "adjusted_close",
+      "close_31d",
+      "close_63d",
+      "close_p2",
+      "close_p3",
+      "high_31d",
+      "high_63d",
+      "high_p2",
+      "high_p3",
+      "label_p2",
+      "label_p2_3",
+      "label_p3",
+      "label_p3_5",
+      "low_31d",
+      "low_63d",
+      "low_p2",
+      "low_p3",
+      "return_31d",
+      "return_63d",
+      "return_p2",
+      "return_p3",
+      "stop",
+      "target"
+    ],
+    "future_derived_columns_included": [],
+    "same_session_observables_only": true,
+    "status": "PASS"
+  },
+  "row_count": 392269,
+  "schema": [
+    "symbol",
+    "date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "value_traded",
+    "trades_count",
+    "is_final",
+    "partial",
+    "source_layer",
+    "source_run_id",
+    "source_file_sha256"
+  ],
+  "session_count": 1917,
+  "source": {
+    "archive_runs": [
+      {
+        "end_date": "2026-07-25",
+        "finished_at": "2026-07-24T23:02:12.539371+00:00",
+        "historical_bytes": 314292,
+        "historical_sha256": "94d585e940d3932814e16b2c2d9d8088a8133afb375bbf783cc9a920dc9f56a4",
+        "manifest_sha256": "561ae5ab6dfc3f383e6467beb0e7b104eccf0262a5574987dc688f194baf754a",
+        "run_id": "tasi_2026-07-01_2026-07-25_20260724T224740032444Z",
+        "start_date": "2026-07-01",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-07-26",
+        "finished_at": "2026-07-26T15:37:15.339691+00:00",
+        "historical_bytes": 18518,
+        "historical_sha256": "1399c61e8f7fe46fad0af17b0f849573aed0c13690e21df7605aa5855d1d51ae",
+        "manifest_sha256": "13d32fbc756c81d3cdc2dd0efd30246f74df122d5a29a71ad3274d693e775f1e",
+        "run_id": "tasi_2026-07-26_2026-07-26_20260726T153020799318Z",
+        "start_date": "2026-07-26",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-07-27",
+        "finished_at": "2026-07-27T15:37:20.611320+00:00",
+        "historical_bytes": 18583,
+        "historical_sha256": "08e1cc329a03547ec4c23f2c91c1939d7f3b9ff851b637111c58a1c412e7a980",
+        "manifest_sha256": "6c7ddbc9d25ffefe67f4d730e85647b9401d60ca532dfe9d6098d3a0d52b3906",
+        "run_id": "tasi_2026-07-27_2026-07-27_20260727T153021805810Z",
+        "start_date": "2026-07-27",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-07-28",
+        "finished_at": "2026-07-28T15:37:12.115654+00:00",
+        "historical_bytes": 18536,
+        "historical_sha256": "81778e79668b6fab38ad71abd544b6abf663a6cbc4c72c97310bc6d5ec4e0335",
+        "manifest_sha256": "a6fbed694a9bb3e5cce7c2326459ea616154e83250505aaf5fa2198d11e4a591",
+        "run_id": "tasi_2026-07-28_2026-07-28_20260728T153021299306Z",
+        "start_date": "2026-07-28",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-07-29",
+        "finished_at": "2026-07-29T15:38:34.100711+00:00",
+        "historical_bytes": 18626,
+        "historical_sha256": "cfefe94f48b73159ae82df75463f4e3f4845d0dece465ad842aa061a0d350d8d",
+        "manifest_sha256": "a23c9b4b6a6c1aeffbbed0bd65be956c5125dd555caf5893fdba94a97d34c7fb",
+        "run_id": "tasi_2026-07-29_2026-07-29_20260729T153021317502Z",
+        "start_date": "2026-07-29",
+        "status": "completed_with_errors"
+      },
+      {
+        "end_date": "2026-07-30",
+        "finished_at": "2026-07-30T15:37:11.112644+00:00",
+        "historical_bytes": 18622,
+        "historical_sha256": "289b5b91df42eedaba58013d4e726e69d9b729d08635fcf0e5525b016c8d4704",
+        "manifest_sha256": "a5119437360ec1c312af55a474d186e234ef385016653cd213ba423c83e25a71",
+        "run_id": "tasi_2026-07-30_2026-07-30_20260730T153023201204Z",
+        "start_date": "2026-07-30",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-02",
+        "finished_at": "2026-08-02T15:37:10.392335+00:00",
+        "historical_bytes": 18618,
+        "historical_sha256": "2eb23ca39fcf0e44fa270e6e4d6a1341261e22b2abfbc789ec2875a29009248b",
+        "manifest_sha256": "7ec90bfcce3047eb94f492ed19b495cfbdc6953ebe1a5158059e445aad029557",
+        "run_id": "tasi_2026-07-31_2026-08-02_20260802T153020127593Z",
+        "start_date": "2026-07-31",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-03",
+        "finished_at": "2026-08-03T15:37:14.403387+00:00",
+        "historical_bytes": 18753,
+        "historical_sha256": "4b0f0fa9c3b343cf96fecea13101ae13ad2a21806fd55533770061ac5bb0689d",
+        "manifest_sha256": "e747d235d4a058cad763db574df7ddc4c6a27fe643d7f9c766b4ab531282d5f0",
+        "run_id": "tasi_2026-08-03_2026-08-03_20260803T153021496139Z",
+        "start_date": "2026-08-03",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-04",
+        "finished_at": "2026-08-04T15:37:22.114476+00:00",
+        "historical_bytes": 18718,
+        "historical_sha256": "32de4882671eec0a9062962d0f5591f8e56969b134d0070652d21718d4563e66",
+        "manifest_sha256": "5a5cee07f345b7aaaaed3e8e8476f31ca817aa0d8b2cc669eb7bfd79b3f1f1e7",
+        "run_id": "tasi_2026-08-04_2026-08-04_20260804T153023696814Z",
+        "start_date": "2026-08-04",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-05",
+        "finished_at": "2026-08-05T15:37:22.187676+00:00",
+        "historical_bytes": 18729,
+        "historical_sha256": "9fd93f225e2663ef72017465f1af6b5bb1e9f620c1b69c07a1f0fd54b850091a",
+        "manifest_sha256": "3956ace87176777fba400732181a2bff7a015d7bfcccbb8cd2154672087bb09f",
+        "run_id": "tasi_2026-08-05_2026-08-05_20260805T153024437012Z",
+        "start_date": "2026-08-05",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-06",
+        "finished_at": "2026-08-06T15:37:25.806503+00:00",
+        "historical_bytes": 18722,
+        "historical_sha256": "6ff377152d0ead67e84f33bc0daa618a818145aa8e2f551c9273431d88ac3851",
+        "manifest_sha256": "446b77188a7f188ccf8e3d9c564da5db4a5178a8596538316ae0e35ad2bd5efe",
+        "run_id": "tasi_2026-08-06_2026-08-06_20260806T153021501965Z",
+        "start_date": "2026-08-06",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-09",
+        "finished_at": "2026-08-09T15:37:12.583301+00:00",
+        "historical_bytes": 18606,
+        "historical_sha256": "d7eb763bea83ef8684d027dfe3fb0fb7c951f2a9c34d7e37300eab6704449ed3",
+        "manifest_sha256": "1ba5e3e9622bc836a3605aee26df969ff02a745ffd45dfb7e144ddd76f8fab14",
+        "run_id": "tasi_2026-08-07_2026-08-09_20260809T153020287151Z",
+        "start_date": "2026-08-07",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-10",
+        "finished_at": "2026-08-10T15:37:02.785378+00:00",
+        "historical_bytes": 18765,
+        "historical_sha256": "84d11a25e4f1e5c1fd93cef767caa7b24135f07229eeaeab08169c657f7b53de",
+        "manifest_sha256": "e0d772eabd1cff560163fdef446419f352dd46539a624010fd1b22df49563d16",
+        "run_id": "tasi_2026-08-10_2026-08-10_20260810T153020102570Z",
+        "start_date": "2026-08-10",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-11",
+        "finished_at": "2026-08-11T15:37:09.304097+00:00",
+        "historical_bytes": 18767,
+        "historical_sha256": "2ca6395fd3fcc72ba670e2961883e5c743cbb0e78c08f0ae926df09c31320865",
+        "manifest_sha256": "dd8a09fcf1ac1598154b7201c02bbe1cdbeea4c9451bd8f26406a7d35eb0b52f",
+        "run_id": "tasi_2026-08-11_2026-08-11_20260811T153022011718Z",
+        "start_date": "2026-08-11",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-12",
+        "finished_at": "2026-08-12T15:37:19.994441+00:00",
+        "historical_bytes": 18487,
+        "historical_sha256": "8862a2d01571a3c9a9cdaef7d6c4c85e805809ad63506c8d9042aff3fa53b579",
+        "manifest_sha256": "551052d3b0351f3095b8a11439278b38d02158f5d8c839ba2cb1a853ef356fe6",
+        "run_id": "tasi_2026-08-12_2026-08-12_20260812T153021905708Z",
+        "start_date": "2026-08-12",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-13",
+        "finished_at": "2026-08-13T15:37:14.198471+00:00",
+        "historical_bytes": 18767,
+        "historical_sha256": "e0b6e7e97827824585b899f3f5ae2a43f595aeae92435da9a370d3df14b68b99",
+        "manifest_sha256": "93a99fdb4ee45fd7e279bb29c3c7624cd00a97ea20f55f16f6eb614c2321ce6e",
+        "run_id": "tasi_2026-08-13_2026-08-13_20260813T153020777659Z",
+        "start_date": "2026-08-13",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-16",
+        "finished_at": "2026-08-16T15:37:11.401342+00:00",
+        "historical_bytes": 18702,
+        "historical_sha256": "5392abdf5e4a97362d33f1f6287bf2bc003c7d4bb43d28918b8aa095af9310d7",
+        "manifest_sha256": "2ac475e3f0faccde02c732f6777be931308f580c50061543700419c61576375f",
+        "run_id": "tasi_2026-08-14_2026-08-16_20260816T153020395457Z",
+        "start_date": "2026-08-14",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-17",
+        "finished_at": "2026-08-17T15:37:19.309697+00:00",
+        "historical_bytes": 18789,
+        "historical_sha256": "56ab1200186f32f6bf2b699463f355510bc0a3da931f38c90816013f38a2eaf0",
+        "manifest_sha256": "3b85bf63fd53df356dda051781a14474fe3bda72c7150996f766093e5ba1b95e",
+        "run_id": "tasi_2026-08-17_2026-08-17_20260817T153022794323Z",
+        "start_date": "2026-08-17",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-18",
+        "finished_at": "2026-08-18T15:37:10.756499+00:00",
+        "historical_bytes": 18766,
+        "historical_sha256": "1cfd844fc98ba7ee716337d459294e8e314daaa0f85480a8e110399f3a6b856d",
+        "manifest_sha256": "055aae1cd7bf52ecc41b4037775c7c714571326d655420e1d25ee467b613a372",
+        "run_id": "tasi_2026-08-18_2026-08-18_20260818T153020653358Z",
+        "start_date": "2026-08-18",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-19",
+        "finished_at": "2026-08-27T21:54:11.604978+00:00",
+        "historical_bytes": 18707,
+        "historical_sha256": "c9f50859d8825bb8e17dc890cb696be42681eb6c5d61b3749a33257a86f3517b",
+        "manifest_sha256": "c5ab81f4ca247eb2203e108369886b9dd6b69097b6b588bad561f9d98e4ef9c9",
+        "run_id": "tasi_2026-08-19_2026-08-19_20260819T153022440747Z",
+        "start_date": "2026-08-19",
+        "status": "completed"
+      },
+      {
+        "end_date": "2026-08-28",
+        "finished_at": "2026-08-27T22:20:52.712388+00:00",
+        "historical_bytes": 112427,
+        "historical_sha256": "7a00d373848e778f83c80f1777575ad48a6a4c0c192fe2e6a4123b56ae26cdee",
+        "manifest_sha256": "f31b20d22f118d81db50c04a1a4cb6001aeb701206bb156c2d45e7fec1369fba",
+        "run_id": "tasi_2026-08-20_2026-08-28_20260827T215758538311Z",
+        "start_date": "2026-08-20",
+        "status": "completed_with_errors"
+      }
+    ],
+    "baseline": {
+      "bytes": 159038552,
+      "max_date": "2026-06-30",
+      "min_date": "2019-01-01",
+      "rows": 380311,
+      "sha256": "fe33df9ae5456d8ee27133c42c244c81d150008ababc19399c7ed428638b57ea",
+      "symbols": 259
+    },
+    "name": "SMIP preserved baseline and SMIP-X SAHMK TASI archive"
+  },
+  "symbol_count": 287
+}
