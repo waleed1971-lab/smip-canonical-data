@@ -1,28 +1,58 @@
 {
+  "automatic_update": {
+    "enabled": true,
+    "fail_closed": true,
+    "mode": "github-actions-public-pull",
+    "no_change_is_idempotent": true,
+    "schedule": {
+      "cron_utc": [
+        "45 15 * * 0-4",
+        "55 15 * * 0-4"
+      ],
+      "scheduled_times_local": [
+        "18:45",
+        "18:55"
+      ],
+      "timezone": "Asia/Riyadh",
+      "trading_days": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday"
+      ]
+    },
+    "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
+    "source_dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
+    "source_generated_at": "2026-08-30T16:00:55.142242+00:00",
+    "source_last_session": "2026-08-30",
+    "source_manifest_sha256": "b7b7cf37e852887129c453d811f041d4bb038442226fe4b999ccb53d8cf9aeb6",
+    "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json"
+  },
   "canonical_gzip": {
-    "decompressed_sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
-    "decompressed_size_bytes": 54941844,
+    "decompressed_sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
+    "decompressed_size_bytes": 54996850,
     "path": "canonical-daily.csv.gz",
-    "sha256": "326b35b2b527b9a111d2d2ec89dcb394faf8ca989386cbd6fcb274ac4dfe90ac",
-    "size_bytes": 6683390,
+    "sha256": "2d4f0a9db8824818f33179dba7c47564913ce2d1f4846c2536e3990021981dd3",
+    "size_bytes": 6704569,
     "status": "PASS"
   },
-  "commit_sha": "18cd257b123804cfa05973f5cf34e390a12f6ab7",
-  "executed_at": "2026-08-30T22:27:19.387398+00:00",
+  "commit_sha": "f7b79fed17b2ca36a33da078c3ad76266f12484a",
+  "executed_at": "2026-08-31T00:01:48.583759+00:00",
   "manifest": {
-    "dataset_version": "smip-canonical-daily-v1-326b35b2b527b9a1",
+    "dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
     "first_session": "2019-01-01",
-    "generated_at": "2026-08-29T16:36:38.736567+00:00",
-    "last_session": "2026-08-27",
+    "generated_at": "2026-08-30T16:00:55.142242+00:00",
+    "last_session": "2026-08-30",
     "leakage_policy_status": "PASS",
     "path": "manifest.json",
-    "row_count": 392269,
-    "sha256": "e90255d774efe860df23be9ce761910eb97f09df85f9908502d3f865ce63deb6",
-    "symbol_count": 287
+    "row_count": 392556,
+    "sha256": "0085263e385150030658a0dc1e94b00a0326c7477ab20902f1b5deffbc7cff32",
+    "symbol_count": 288
   },
   "policy": {
     "a_s_l_changed": false,
-    "automatic_update_enabled": false,
+    "automatic_update_enabled": true,
     "consumer_side_byte_verification": "NOT_PERFORMED",
     "discovery_only_started": false,
     "fail_closed": true,
@@ -31,11 +61,11 @@
   },
   "receipt_schema_version": "smip-repository-integrity-receipt-v1",
   "reconstruction": {
-    "last_session": "2026-08-27",
+    "last_session": "2026-08-30",
     "line_ending": "LF",
-    "row_count": 392269,
-    "sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
-    "size_bytes": 54941844,
+    "row_count": 392556,
+    "sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
+    "size_bytes": 54996850,
     "sort_order": [
       "symbol",
       "date"
@@ -1338,43 +1368,43 @@
       },
       {
         "first_session": "2026-08-02",
-        "last_session": "2026-08-27",
+        "last_session": "2026-08-30",
         "part_count_for_period": 2,
         "part_index": 1,
         "path": "parts/canonical-2026-08-part01.csv",
         "period": "2026-08",
         "row_count": 5209,
-        "sha256": "59547f18e5eb04f3e150e11ef13e660a217bdf01b4f47cef8b2476f5d1a51c7f",
-        "size_bytes": 999890,
+        "sha256": "65c64670ffef4ff8649efb31b0942629202a588203ac7921abd00786b8761468",
+        "size_bytes": 999919,
         "status": "PASS",
-        "symbol_count": 261,
+        "symbol_count": 250,
         "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part01.csv"
       },
       {
         "first_session": "2026-08-02",
-        "last_session": "2026-08-27",
+        "last_session": "2026-08-30",
         "part_count_for_period": 2,
         "part_index": 2,
         "path": "parts/canonical-2026-08-part02.csv",
         "period": "2026-08",
-        "row_count": 501,
-        "sha256": "85dff0c6d803219624edbd617d7915525d6527abf6ebc6d3520dc3b74dfc75b5",
-        "size_bytes": 95431,
+        "row_count": 788,
+        "sha256": "00397c2c1242160c4515044d464aa698a27dce59667845a90559398bafddb91b",
+        "size_bytes": 150408,
         "status": "PASS",
-        "symbol_count": 26,
+        "symbol_count": 38,
         "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part02.csv"
       }
     ],
     "max_part_size_bytes": 999947,
     "period_count": 92,
-    "total_row_count": 392269
+    "total_row_count": 392556
   },
   "verification_type": "repository-side integrity attestation",
   "workflow": {
     "name": "Repository integrity attestation",
     "ref": "refs/heads/main",
     "run_attempt": "1",
-    "run_id": "33339189711",
-    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33339189711"
+    "run_id": "33343341341",
+    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33343341341"
   }
 }
