@@ -1,10 +1,10 @@
 {
   "auth_scope": "research-read-only",
   "canonical_file": {
-    "bytes": 6704569,
+    "bytes": 6726955,
     "media_type": "application/gzip",
     "name": "canonical-daily.csv.gz",
-    "sha256": "2d4f0a9db8824818f33179dba7c47564913ce2d1f4846c2536e3990021981dd3"
+    "sha256": "daf7e4489c78ba4bc556ecefad85b9be4c51a0c4e196848ed4f64662d8c8b1a1"
   },
   "completeness": {
     "conflicting_duplicate_rows": 0,
@@ -14,20 +14,20 @@
     "missing_values_by_column": {
       "close": 0,
       "high": 0,
-      "is_final": 392556,
+      "is_final": 392844,
       "low": 0,
       "open": 0,
-      "partial": 392556,
-      "trades_count": 392556,
+      "partial": 392844,
+      "trades_count": 392844,
       "value_traded": 243814,
       "volume": 0
     }
   },
-  "dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
+  "dataset_version": "smip-canonical-daily-v1-daf7e4489c78ba4b",
   "first_session": "2019-01-01",
-  "generated_at": "2026-08-30T16:00:55.142242+00:00",
-  "input_fingerprint": "10c662dcc73d3daef24134f74ada76000b093162156c7be51cd74ed46369d738",
-  "last_session": "2026-08-30",
+  "generated_at": "2026-08-31T16:33:51.103257+00:00",
+  "input_fingerprint": "47c32800137a8a3c574d2a8735a1f4e9b2a51a34a6e7ddf663522d718a7cdcfa",
+  "last_session": "2026-08-31",
   "leakage_policy": {
     "adjusted_close_included": false,
     "baseline_mapping": {
@@ -63,7 +63,7 @@
     "same_session_observables_only": true,
     "status": "PASS"
   },
-  "row_count": 392556,
+  "row_count": 392844,
   "schema": [
     "symbol",
     "date",
@@ -80,7 +80,7 @@
     "source_run_id",
     "source_file_sha256"
   ],
-  "session_count": 1918,
+  "session_count": 1919,
   "source": {
     "archive_runs": [
       {
@@ -302,6 +302,16 @@
         "run_id": "tasi_2026-08-29_2026-08-30_20260830T153021490619Z",
         "start_date": "2026-08-29",
         "status": "completed_with_errors"
+      },
+      {
+        "end_date": "2026-08-31",
+        "finished_at": "2026-08-31T15:35:55.882852+00:00",
+        "historical_bytes": 18975,
+        "historical_sha256": "374b46eb50c52f8fd4d5c98f4b7cf8e0c79e078fd621a4b30f58d5382471b4af",
+        "manifest_sha256": "430d76262c57706c5a553537a646a2e6a2bd7e253901ef2afa7f0b5dc84972d0",
+        "run_id": "tasi_2026-08-31_2026-08-31_20260831T153022596960Z",
+        "start_date": "2026-08-31",
+        "status": "completed"
       }
     ],
     "baseline": {
@@ -314,13 +324,13 @@
     },
     "name": "SMIP preserved baseline and SMIP-X SAHMK TASI archive"
   },
-  "symbol_count": 288,
+  "symbol_count": 289,
   "canonical_text": {
     "encoding": "utf-8",
     "line_ending": "LF",
-    "size_bytes": 54996850,
-    "sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
-    "row_count": 392556,
+    "size_bytes": 55052148,
+    "sha256": "5ef0510cdfc2d33cf689ed46f77b77572038a29f6261c0ccad303768f6d459d0",
+    "row_count": 392844,
     "header": [
       "symbol",
       "date",
@@ -2096,13 +2106,13 @@
       "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part01.csv",
       "encoding": "utf-8",
       "content_type": "text/csv; charset=utf-8",
-      "size_bytes": 999919,
+      "size_bytes": 999960,
       "max_size_bytes_exclusive": 1000000,
-      "sha256": "65c64670ffef4ff8649efb31b0942629202a588203ac7921abd00786b8761468",
-      "row_count": 5209,
-      "symbol_count": 250,
+      "sha256": "bf5fdd1359a7eb327cd90f3e938ab4a23aee136a90a66e87f936a37739a021a1",
+      "row_count": 5210,
+      "symbol_count": 239,
       "first_session": "2026-08-02",
-      "last_session": "2026-08-30",
+      "last_session": "2026-08-31",
       "includes_header": true,
       "part_count_for_period": 2
     },
@@ -2115,13 +2125,13 @@
       "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part02.csv",
       "encoding": "utf-8",
       "content_type": "text/csv; charset=utf-8",
-      "size_bytes": 150408,
+      "size_bytes": 205665,
       "max_size_bytes_exclusive": 1000000,
-      "sha256": "00397c2c1242160c4515044d464aa698a27dce59667845a90559398bafddb91b",
-      "row_count": 788,
-      "symbol_count": 38,
+      "sha256": "7ea4f1585501cff1ef25857fdb37a42bbc0dd81675b610dd8f21a07985f4b7b3",
+      "row_count": 1075,
+      "symbol_count": 50,
       "first_session": "2026-08-02",
-      "last_session": "2026-08-30",
+      "last_session": "2026-08-31",
       "includes_header": true,
       "part_count_for_period": 2
     }
@@ -2145,9 +2155,9 @@
       "Write the common header followed by the sorted original row bytes using LF line endings.",
       "The reconstructed UTF-8 bytes must match canonical_text.sha256 and canonical_text.size_bytes."
     ],
-    "expected_sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
-    "expected_size_bytes": 54996850,
-    "expected_row_count": 392556,
+    "expected_sha256": "5ef0510cdfc2d33cf689ed46f77b77572038a29f6261c0ccad303768f6d459d0",
+    "expected_size_bytes": 55052148,
+    "expected_row_count": 392844,
     "automatic_update_enabled": true
   },
   "automatic_update": {
@@ -2155,10 +2165,10 @@
     "mode": "github-actions-public-pull",
     "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json",
     "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
-    "source_manifest_sha256": "b7b7cf37e852887129c453d811f041d4bb038442226fe4b999ccb53d8cf9aeb6",
-    "source_dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
-    "source_generated_at": "2026-08-30T16:00:55.142242+00:00",
-    "source_last_session": "2026-08-30",
+    "source_manifest_sha256": "6b64f742dc8b76f981cc1dab61cc0869086fc18ac9252c3c3aab7dbf9a4637fe",
+    "source_dataset_version": "smip-canonical-daily-v1-daf7e4489c78ba4b",
+    "source_generated_at": "2026-08-31T16:33:51.103257+00:00",
+    "source_last_session": "2026-08-31",
     "schedule": {
       "timezone": "Asia/Riyadh",
       "trading_days": [
@@ -2170,11 +2180,17 @@
       ],
       "scheduled_times_local": [
         "18:45",
-        "18:55"
+        "19:05",
+        "19:25",
+        "19:45",
+        "20:05"
       ],
       "cron_utc": [
         "45 15 * * 0-4",
-        "55 15 * * 0-4"
+        "5 16 * * 0-4",
+        "25 16 * * 0-4",
+        "45 16 * * 0-4",
+        "5 17 * * 0-4"
       ]
     },
     "no_change_is_idempotent": true,
