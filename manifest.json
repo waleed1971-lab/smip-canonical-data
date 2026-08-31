@@ -1,10 +1,10 @@
 {
   "auth_scope": "research-read-only",
   "canonical_file": {
-    "bytes": 6683390,
+    "bytes": 6704569,
     "media_type": "application/gzip",
     "name": "canonical-daily.csv.gz",
-    "sha256": "326b35b2b527b9a111d2d2ec89dcb394faf8ca989386cbd6fcb274ac4dfe90ac"
+    "sha256": "2d4f0a9db8824818f33179dba7c47564913ce2d1f4846c2536e3990021981dd3"
   },
   "completeness": {
     "conflicting_duplicate_rows": 0,
@@ -14,20 +14,20 @@
     "missing_values_by_column": {
       "close": 0,
       "high": 0,
-      "is_final": 392269,
+      "is_final": 392556,
       "low": 0,
       "open": 0,
-      "partial": 392269,
-      "trades_count": 392269,
+      "partial": 392556,
+      "trades_count": 392556,
       "value_traded": 243814,
       "volume": 0
     }
   },
-  "dataset_version": "smip-canonical-daily-v1-326b35b2b527b9a1",
+  "dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
   "first_session": "2019-01-01",
-  "generated_at": "2026-08-29T16:36:38.736567+00:00",
-  "input_fingerprint": "fa84eccecb5f7a18842491d1a89cd1d71d3a34c5fc616ae2bd46019f87c154e8",
-  "last_session": "2026-08-27",
+  "generated_at": "2026-08-30T16:00:55.142242+00:00",
+  "input_fingerprint": "10c662dcc73d3daef24134f74ada76000b093162156c7be51cd74ed46369d738",
+  "last_session": "2026-08-30",
   "leakage_policy": {
     "adjusted_close_included": false,
     "baseline_mapping": {
@@ -63,7 +63,7 @@
     "same_session_observables_only": true,
     "status": "PASS"
   },
-  "row_count": 392269,
+  "row_count": 392556,
   "schema": [
     "symbol",
     "date",
@@ -80,7 +80,7 @@
     "source_run_id",
     "source_file_sha256"
   ],
-  "session_count": 1917,
+  "session_count": 1918,
   "source": {
     "archive_runs": [
       {
@@ -292,6 +292,16 @@
         "run_id": "tasi_2026-08-20_2026-08-28_20260827T215758538311Z",
         "start_date": "2026-08-20",
         "status": "completed_with_errors"
+      },
+      {
+        "end_date": "2026-08-30",
+        "finished_at": "2026-08-30T15:35:49.398046+00:00",
+        "historical_bytes": 18817,
+        "historical_sha256": "40f2932d214f44ed867e412ffba0369130210869179423e6eadc9f965765cdba",
+        "manifest_sha256": "62726c7dd75f90d57112f1483dcde99bc0ac82fcedf3dc8d325ecb5d7bac0092",
+        "run_id": "tasi_2026-08-29_2026-08-30_20260830T153021490619Z",
+        "start_date": "2026-08-29",
+        "status": "completed_with_errors"
       }
     ],
     "baseline": {
@@ -304,13 +314,13 @@
     },
     "name": "SMIP preserved baseline and SMIP-X SAHMK TASI archive"
   },
-  "symbol_count": 287,
+  "symbol_count": 288,
   "canonical_text": {
     "encoding": "utf-8",
     "line_ending": "LF",
-    "size_bytes": 54941844,
-    "sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
-    "row_count": 392269,
+    "size_bytes": 54996850,
+    "sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
+    "row_count": 392556,
     "header": [
       "symbol",
       "date",
@@ -2086,13 +2096,13 @@
       "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part01.csv",
       "encoding": "utf-8",
       "content_type": "text/csv; charset=utf-8",
-      "size_bytes": 999890,
+      "size_bytes": 999919,
       "max_size_bytes_exclusive": 1000000,
-      "sha256": "59547f18e5eb04f3e150e11ef13e660a217bdf01b4f47cef8b2476f5d1a51c7f",
+      "sha256": "65c64670ffef4ff8649efb31b0942629202a588203ac7921abd00786b8761468",
       "row_count": 5209,
-      "symbol_count": 261,
+      "symbol_count": 250,
       "first_session": "2026-08-02",
-      "last_session": "2026-08-27",
+      "last_session": "2026-08-30",
       "includes_header": true,
       "part_count_for_period": 2
     },
@@ -2105,13 +2115,13 @@
       "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part02.csv",
       "encoding": "utf-8",
       "content_type": "text/csv; charset=utf-8",
-      "size_bytes": 95431,
+      "size_bytes": 150408,
       "max_size_bytes_exclusive": 1000000,
-      "sha256": "85dff0c6d803219624edbd617d7915525d6527abf6ebc6d3520dc3b74dfc75b5",
-      "row_count": 501,
-      "symbol_count": 26,
+      "sha256": "00397c2c1242160c4515044d464aa698a27dce59667845a90559398bafddb91b",
+      "row_count": 788,
+      "symbol_count": 38,
       "first_session": "2026-08-02",
-      "last_session": "2026-08-27",
+      "last_session": "2026-08-30",
       "includes_header": true,
       "part_count_for_period": 2
     }
@@ -2135,9 +2145,39 @@
       "Write the common header followed by the sorted original row bytes using LF line endings.",
       "The reconstructed UTF-8 bytes must match canonical_text.sha256 and canonical_text.size_bytes."
     ],
-    "expected_sha256": "64b753db196f9cfe4d2bb5b07c03ad32df893af690487a011a86c37c1352a059",
-    "expected_size_bytes": 54941844,
-    "expected_row_count": 392269,
-    "automatic_update_enabled": false
+    "expected_sha256": "100c3e5ab650d5fdc62a151b2f4ef349b360a8a9425d5993fca5c8ba44c2516b",
+    "expected_size_bytes": 54996850,
+    "expected_row_count": 392556,
+    "automatic_update_enabled": true
+  },
+  "automatic_update": {
+    "enabled": true,
+    "mode": "github-actions-public-pull",
+    "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json",
+    "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
+    "source_manifest_sha256": "b7b7cf37e852887129c453d811f041d4bb038442226fe4b999ccb53d8cf9aeb6",
+    "source_dataset_version": "smip-canonical-daily-v1-2d4f0a9db8824818",
+    "source_generated_at": "2026-08-30T16:00:55.142242+00:00",
+    "source_last_session": "2026-08-30",
+    "schedule": {
+      "timezone": "Asia/Riyadh",
+      "trading_days": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday"
+      ],
+      "scheduled_times_local": [
+        "18:45",
+        "18:55"
+      ],
+      "cron_utc": [
+        "45 15 * * 0-4",
+        "55 15 * * 0-4"
+      ]
+    },
+    "no_change_is_idempotent": true,
+    "fail_closed": true
   }
 }
