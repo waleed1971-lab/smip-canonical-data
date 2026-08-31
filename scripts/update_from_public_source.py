@@ -40,6 +40,15 @@ EXPECTED_SCHEMA = [
     "source_run_id",
     "source_file_sha256",
 ]
+
+SCHEDULED_TIMES_LOCAL = ["18:45", "19:05", "19:25", "19:45", "20:05"]
+CRON_UTC = [
+    "45 15 * * 0-4",
+    "5 16 * * 0-4",
+    "25 16 * * 0-4",
+    "45 16 * * 0-4",
+    "5 17 * * 0-4",
+]
 HEX64 = re.compile(r"[0-9a-f]{64}")
 ISO_DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 
@@ -265,8 +274,8 @@ def stage_snapshot(
         "schedule": {
             "timezone": "Asia/Riyadh",
             "trading_days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-            "scheduled_times_local": ["18:45", "18:55"],
-            "cron_utc": ["45 15 * * 0-4", "55 15 * * 0-4"],
+            "scheduled_times_local": SCHEDULED_TIMES_LOCAL,
+            "cron_utc": CRON_UTC,
         },
         "no_change_is_idempotent": True,
         "fail_closed": True,

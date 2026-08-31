@@ -9,7 +9,9 @@ import unittest
 from pathlib import Path
 
 from scripts.update_from_public_source import (
+    CRON_UTC,
     EXPECTED_SCHEMA,
+    SCHEDULED_TIMES_LOCAL,
     UpdateError,
     determine_update,
     index_canonical,
@@ -51,6 +53,22 @@ class AutomaticUpdateContractTest(unittest.TestCase):
         changed, new_rows = determine_update(manifest, index, dict(manifest), index)
         self.assertFalse(changed)
         self.assertEqual(new_rows, 0)
+
+    def test_retry_schedule_is_explicit_and_consistent(self) -> None:
+        self.assertEqual(
+            SCHEDULED_TIMES_LOCAL,
+            ["18:45", "19:05", "19:25", "19:45", "20:05"],
+        )
+        self.assertEqual(
+            CRON_UTC,
+            [
+                "45 15 * * 0-4",
+                "5 16 * * 0-4",
+                "25 16 * * 0-4",
+                "45 16 * * 0-4",
+                "5 17 * * 0-4",
+            ],
+        )
 
     def test_new_session_is_append_only(self) -> None:
         current_path = self.write_gzip("current.gz", [row("1000", "2026-01-01")])
