@@ -29,31 +29,31 @@
       ]
     },
     "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
-    "source_dataset_version": "smip-canonical-daily-v1-daf7e4489c78ba4b",
-    "source_generated_at": "2026-08-31T16:33:51.103257+00:00",
-    "source_last_session": "2026-08-31",
-    "source_manifest_sha256": "6b64f742dc8b76f981cc1dab61cc0869086fc18ac9252c3c3aab7dbf9a4637fe",
+    "source_dataset_version": "smip-canonical-daily-v1-3ae2235c1495bc85",
+    "source_generated_at": "2026-09-01T18:51:28.211657+00:00",
+    "source_last_session": "2026-09-01",
+    "source_manifest_sha256": "535f670c6053c9029d6cf3bbc3c5a6699dbe32634cae738ead06a2e6f33b5106",
     "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json"
   },
   "canonical_gzip": {
-    "decompressed_sha256": "5ef0510cdfc2d33cf689ed46f77b77572038a29f6261c0ccad303768f6d459d0",
-    "decompressed_size_bytes": 55052148,
+    "decompressed_sha256": "7be8e7697d9e503650cf212a0fa1ecc4016f072a790b1c36c6f90502762651b6",
+    "decompressed_size_bytes": 55107369,
     "path": "canonical-daily.csv.gz",
-    "sha256": "daf7e4489c78ba4bc556ecefad85b9be4c51a0c4e196848ed4f64662d8c8b1a1",
-    "size_bytes": 6726955,
+    "sha256": "3ae2235c1495bc850b15d8b47d0308348641b358a5af82d2727350d0f139c40f",
+    "size_bytes": 6748927,
     "status": "PASS"
   },
-  "commit_sha": "095aa3aa17742fde8f82d340865b8c6e0a46a9cd",
-  "executed_at": "2026-08-31T17:25:49.040817+00:00",
+  "commit_sha": "48a87649ba42627f453eb703016a5be998a49291",
+  "executed_at": "2026-09-01T18:52:02.322723+00:00",
   "manifest": {
-    "dataset_version": "smip-canonical-daily-v1-daf7e4489c78ba4b",
+    "dataset_version": "smip-canonical-daily-v1-3ae2235c1495bc85",
     "first_session": "2019-01-01",
-    "generated_at": "2026-08-31T16:33:51.103257+00:00",
-    "last_session": "2026-08-31",
+    "generated_at": "2026-09-01T18:51:28.211657+00:00",
+    "last_session": "2026-09-01",
     "leakage_policy_status": "PASS",
     "path": "manifest.json",
-    "row_count": 392844,
-    "sha256": "df820f8c327010cce39cb87f4d929d9bcdc3e2d1dd96f70981a38016dc72f103",
+    "row_count": 393132,
+    "sha256": "f5e25fde9a1323fb1f1f0a94b371b02e88743314dc82adfcb9dc005e48acda27",
     "symbol_count": 289
   },
   "policy": {
@@ -67,11 +67,11 @@
   },
   "receipt_schema_version": "smip-repository-integrity-receipt-v1",
   "reconstruction": {
-    "last_session": "2026-08-31",
+    "last_session": "2026-09-01",
     "line_ending": "LF",
-    "row_count": 392844,
-    "sha256": "5ef0510cdfc2d33cf689ed46f77b77572038a29f6261c0ccad303768f6d459d0",
-    "size_bytes": 55052148,
+    "row_count": 393132,
+    "sha256": "7be8e7697d9e503650cf212a0fa1ecc4016f072a790b1c36c6f90502762651b6",
+    "size_bytes": 55107369,
     "sort_order": [
       "symbol",
       "date"
@@ -82,7 +82,7 @@
   "status": "PASS",
   "text_parts": {
     "all_parts_status": "PASS",
-    "count": 94,
+    "count": 95,
     "items": [
       {
         "first_session": "2019-01-01",
@@ -1399,18 +1399,32 @@
         "status": "PASS",
         "symbol_count": 50,
         "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-08-part02.csv"
+      },
+      {
+        "first_session": "2026-09-01",
+        "last_session": "2026-09-01",
+        "part_count_for_period": 1,
+        "part_index": 1,
+        "path": "parts/canonical-2026-09.csv",
+        "period": "2026-09",
+        "row_count": 288,
+        "sha256": "b9bf82bed02261dacaeb22bf10491184ff094abf090a6f48957c22d61fd2c1cc",
+        "size_bytes": 55349,
+        "status": "PASS",
+        "symbol_count": 288,
+        "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-09.csv"
       }
     ],
     "max_part_size_bytes": 999960,
-    "period_count": 92,
-    "total_row_count": 392844
+    "period_count": 93,
+    "total_row_count": 393132
   },
   "verification_type": "repository-side integrity attestation",
   "workflow": {
     "name": "Repository integrity attestation",
     "ref": "refs/heads/main",
     "run_attempt": "1",
-    "run_id": "33419500799",
-    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33419500799"
+    "run_id": "33546148362",
+    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33546148362"
   }
 }
