@@ -11,9 +11,12 @@ from pathlib import Path
 from scripts.update_from_public_source import (
     CRON_UTC,
     EXPECTED_SCHEMA,
+    FRESHNESS_DEADLINE_LOCAL,
     SCHEDULED_TIMES_LOCAL,
     UpdateError,
+    automatic_update_configuration_current,
     determine_update,
+    expected_schedule,
     index_canonical,
 )
 
@@ -57,18 +60,49 @@ class AutomaticUpdateContractTest(unittest.TestCase):
     def test_retry_schedule_is_explicit_and_consistent(self) -> None:
         self.assertEqual(
             SCHEDULED_TIMES_LOCAL,
-            ["18:45", "19:05", "19:25", "19:45", "20:05"],
+            ["16:05", "16:25", "16:45", "17:05", "17:25"],
         )
         self.assertEqual(
             CRON_UTC,
             [
-                "45 15 * * 0-4",
-                "5 16 * * 0-4",
-                "25 16 * * 0-4",
-                "45 16 * * 0-4",
-                "5 17 * * 0-4",
+                "5 13 * * 0-4",
+                "25 13 * * 0-4",
+                "45 13 * * 0-4",
+                "5 14 * * 0-4",
+                "25 14 * * 0-4",
             ],
         )
+        self.assertEqual(FRESHNESS_DEADLINE_LOCAL, "17:45")
+
+    def test_schedule_only_change_requires_configuration_update(self) -> None:
+        manifest = {
+            "text_parts_reconstruction": {"automatic_update_enabled": True},
+            "automatic_update": {
+                "enabled": True,
+                "schedule": {
+                    "timezone": "Asia/Riyadh",
+                    "trading_days": [
+                        "Sunday",
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                    ],
+                    "scheduled_times_local": ["18:45", "19:05", "19:25", "19:45", "20:05"],
+                    "cron_utc": [
+                        "45 15 * * 0-4",
+                        "5 16 * * 0-4",
+                        "25 16 * * 0-4",
+                        "45 16 * * 0-4",
+                        "5 17 * * 0-4",
+                    ],
+                },
+            },
+        }
+
+        self.assertFalse(automatic_update_configuration_current(manifest))
+        manifest["automatic_update"]["schedule"] = expected_schedule()
+        self.assertTrue(automatic_update_configuration_current(manifest))
 
     def test_new_session_is_append_only(self) -> None:
         current_path = self.write_gzip("current.gz", [row("1000", "2026-01-01")])

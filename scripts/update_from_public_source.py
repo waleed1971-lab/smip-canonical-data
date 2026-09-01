@@ -41,14 +41,15 @@ EXPECTED_SCHEMA = [
     "source_file_sha256",
 ]
 
-SCHEDULED_TIMES_LOCAL = ["18:45", "19:05", "19:25", "19:45", "20:05"]
+SCHEDULED_TIMES_LOCAL = ["16:05", "16:25", "16:45", "17:05", "17:25"]
 CRON_UTC = [
-    "45 15 * * 0-4",
-    "5 16 * * 0-4",
-    "25 16 * * 0-4",
-    "45 16 * * 0-4",
-    "5 17 * * 0-4",
+    "5 13 * * 0-4",
+    "25 13 * * 0-4",
+    "45 13 * * 0-4",
+    "5 14 * * 0-4",
+    "25 14 * * 0-4",
 ]
+FRESHNESS_DEADLINE_LOCAL = "17:45"
 HEX64 = re.compile(r"[0-9a-f]{64}")
 ISO_DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 
@@ -81,6 +82,28 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def expected_schedule() -> dict[str, Any]:
+    return {
+        "timezone": "Asia/Riyadh",
+        "trading_days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+        "scheduled_times_local": SCHEDULED_TIMES_LOCAL,
+        "cron_utc": CRON_UTC,
+        "freshness_deadline_local": FRESHNESS_DEADLINE_LOCAL,
+    }
+
+
+def automatic_update_configuration_current(manifest: dict[str, Any]) -> bool:
+    automatic_update = manifest.get("automatic_update")
+    reconstruction = manifest.get("text_parts_reconstruction")
+    return (
+        isinstance(automatic_update, dict)
+        and automatic_update.get("enabled") is True
+        and automatic_update.get("schedule") == expected_schedule()
+        and isinstance(reconstruction, dict)
+        and reconstruction.get("automatic_update_enabled") is True
+    )
 
 
 def parse_timestamp(value: Any, field: str) -> datetime:
@@ -271,12 +294,7 @@ def stage_snapshot(
         "source_dataset_version": manifest.get("dataset_version"),
         "source_generated_at": manifest.get("generated_at"),
         "source_last_session": manifest.get("last_session"),
-        "schedule": {
-            "timezone": "Asia/Riyadh",
-            "trading_days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-            "scheduled_times_local": SCHEDULED_TIMES_LOCAL,
-            "cron_utc": CRON_UTC,
-        },
+        "schedule": expected_schedule(),
         "no_change_is_idempotent": True,
         "fail_closed": True,
     }
@@ -371,11 +389,9 @@ def main() -> None:
             source_index = index_canonical(source_canonical_path, source_manifest.get("schema"))
             validate_index_against_manifest(source_index, source_manifest)
             data_changed, new_rows = determine_update(current_manifest, current_index, source_manifest, source_index)
-            enablement_required = (
-                current_manifest.get("text_parts_reconstruction", {}).get("automatic_update_enabled") is not True
-            )
-            changed = data_changed or enablement_required
-            change_type = "data" if data_changed else "enablement" if enablement_required else "none"
+            configuration_required = not automatic_update_configuration_current(current_manifest)
+            changed = data_changed or configuration_required
+            change_type = "data" if data_changed else "configuration" if configuration_required else "none"
             source_manifest_sha256 = sha256_file(source_manifest_path)
 
             if changed:
