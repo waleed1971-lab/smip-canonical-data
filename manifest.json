@@ -1,10 +1,10 @@
 {
   "auth_scope": "research-read-only",
   "canonical_file": {
-    "bytes": 6773001,
+    "bytes": 6794304,
     "media_type": "application/gzip",
     "name": "canonical-daily.csv.gz",
-    "sha256": "d00a40487cc73e1d42abb8a0484557808c175aa8682468ead90603c699105b89"
+    "sha256": "c948b4391202f7eca7e221405a0e4971099f43b8b4ae9e9de09998eeb38c24b4"
   },
   "completeness": {
     "conflicting_duplicate_rows": 0,
@@ -14,20 +14,20 @@
     "missing_values_by_column": {
       "close": 0,
       "high": 0,
-      "is_final": 393420,
+      "is_final": 393708,
       "low": 0,
       "open": 0,
-      "partial": 393420,
-      "trades_count": 393420,
+      "partial": 393708,
+      "trades_count": 393708,
       "value_traded": 243814,
       "volume": 0
     }
   },
-  "dataset_version": "smip-canonical-daily-v1-d00a40487cc73e1d",
+  "dataset_version": "smip-canonical-daily-v1-c948b4391202f7ec",
   "first_session": "2019-01-01",
-  "generated_at": "2026-09-02T18:57:45.184124+00:00",
-  "input_fingerprint": "d4ec6ff169eb86547a1dcf31c1b2fd7e7664416e289afd6aff8a2dde22d7baca",
-  "last_session": "2026-09-02",
+  "generated_at": "2026-09-03T18:34:56.587735+00:00",
+  "input_fingerprint": "7dbca4621fd3e0b970b4aebe5798110e7cd9c9a469dd673828db94f9b65b3eae",
+  "last_session": "2026-09-03",
   "leakage_policy": {
     "adjusted_close_included": false,
     "baseline_mapping": {
@@ -63,7 +63,7 @@
     "same_session_observables_only": true,
     "status": "PASS"
   },
-  "row_count": 393420,
+  "row_count": 393708,
   "schema": [
     "symbol",
     "date",
@@ -80,7 +80,7 @@
     "source_run_id",
     "source_file_sha256"
   ],
-  "session_count": 1921,
+  "session_count": 1922,
   "source": {
     "archive_runs": [
       {
@@ -332,6 +332,16 @@
         "run_id": "tasi_2026-09-02_2026-09-02_20260902T131022255439Z",
         "start_date": "2026-09-02",
         "status": "completed"
+      },
+      {
+        "end_date": "2026-09-03",
+        "finished_at": "2026-09-03T13:16:27.686360+00:00",
+        "historical_bytes": 18834,
+        "historical_sha256": "3aa386953bbc3a390b08d90ad8f2c72dac7fd70f6c4472081a8417000b55d738",
+        "manifest_sha256": "f543a1bbd5a04a7dc1dc4608d89ea638b46f6b29a0a8c02afb1008b7a73897b9",
+        "run_id": "tasi_2026-09-03_2026-09-03_20260903T131022872203Z",
+        "start_date": "2026-09-03",
+        "status": "completed"
       }
     ],
     "baseline": {
@@ -348,9 +358,9 @@
   "canonical_text": {
     "encoding": "utf-8",
     "line_ending": "LF",
-    "size_bytes": 55162564,
-    "sha256": "c62c06bdc0210a2ce6bff597ebc1f665891494dc658624b8ad005c37de90bcc4",
-    "row_count": 393420,
+    "size_bytes": 55217721,
+    "sha256": "d5ba3245300378e8854c23beb4cc9598dd3ff47daf3388c4f3de35836631e7b3",
+    "row_count": 393708,
     "header": [
       "symbol",
       "date",
@@ -2164,13 +2174,13 @@
       "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-09.csv",
       "encoding": "utf-8",
       "content_type": "text/csv; charset=utf-8",
-      "size_bytes": 110544,
+      "size_bytes": 165701,
       "max_size_bytes_exclusive": 1000000,
-      "sha256": "b593a181eb28021857cbe0ec917bba094b170afc7b403706d245659d019e8de5",
-      "row_count": 576,
+      "sha256": "d3568c54074c7f64be2aa5adce5b02047ebebe1a559ff28b93b1edebeceab8ee",
+      "row_count": 864,
       "symbol_count": 288,
       "first_session": "2026-09-01",
-      "last_session": "2026-09-02",
+      "last_session": "2026-09-03",
       "includes_header": true,
       "part_count_for_period": 1
     }
@@ -2194,9 +2204,9 @@
       "Write the common header followed by the sorted original row bytes using LF line endings.",
       "The reconstructed UTF-8 bytes must match canonical_text.sha256 and canonical_text.size_bytes."
     ],
-    "expected_sha256": "c62c06bdc0210a2ce6bff597ebc1f665891494dc658624b8ad005c37de90bcc4",
-    "expected_size_bytes": 55162564,
-    "expected_row_count": 393420,
+    "expected_sha256": "d5ba3245300378e8854c23beb4cc9598dd3ff47daf3388c4f3de35836631e7b3",
+    "expected_size_bytes": 55217721,
+    "expected_row_count": 393708,
     "automatic_update_enabled": true
   },
   "automatic_update": {
@@ -2204,10 +2214,10 @@
     "mode": "github-actions-public-pull",
     "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json",
     "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
-    "source_manifest_sha256": "872919aa29642546f1bd1b8cec41f7022fc0d128a7e3435841da48a525355e69",
-    "source_dataset_version": "smip-canonical-daily-v1-d00a40487cc73e1d",
-    "source_generated_at": "2026-09-02T18:57:45.184124+00:00",
-    "source_last_session": "2026-09-02",
+    "source_manifest_sha256": "4b90ed3f052902e90f5d7f2267da76fec035c3ed50cbb47e237b480eb6dd6022",
+    "source_dataset_version": "smip-canonical-daily-v1-c948b4391202f7ec",
+    "source_generated_at": "2026-09-03T18:34:56.587735+00:00",
+    "source_last_session": "2026-09-03",
     "schedule": {
       "timezone": "Asia/Riyadh",
       "trading_days": [
