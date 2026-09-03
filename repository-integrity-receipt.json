@@ -30,31 +30,31 @@
       ]
     },
     "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
-    "source_dataset_version": "smip-canonical-daily-v1-d00a40487cc73e1d",
-    "source_generated_at": "2026-09-02T18:57:45.184124+00:00",
-    "source_last_session": "2026-09-02",
-    "source_manifest_sha256": "872919aa29642546f1bd1b8cec41f7022fc0d128a7e3435841da48a525355e69",
+    "source_dataset_version": "smip-canonical-daily-v1-c948b4391202f7ec",
+    "source_generated_at": "2026-09-03T18:34:56.587735+00:00",
+    "source_last_session": "2026-09-03",
+    "source_manifest_sha256": "4b90ed3f052902e90f5d7f2267da76fec035c3ed50cbb47e237b480eb6dd6022",
     "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json"
   },
   "canonical_gzip": {
-    "decompressed_sha256": "c62c06bdc0210a2ce6bff597ebc1f665891494dc658624b8ad005c37de90bcc4",
-    "decompressed_size_bytes": 55162564,
+    "decompressed_sha256": "d5ba3245300378e8854c23beb4cc9598dd3ff47daf3388c4f3de35836631e7b3",
+    "decompressed_size_bytes": 55217721,
     "path": "canonical-daily.csv.gz",
-    "sha256": "d00a40487cc73e1d42abb8a0484557808c175aa8682468ead90603c699105b89",
-    "size_bytes": 6773001,
+    "sha256": "c948b4391202f7eca7e221405a0e4971099f43b8b4ae9e9de09998eeb38c24b4",
+    "size_bytes": 6794304,
     "status": "PASS"
   },
-  "commit_sha": "84f5fa305b1bc2de9920b8cb1e3fee61096cfc8d",
-  "executed_at": "2026-09-02T18:58:21.405834+00:00",
+  "commit_sha": "98a08cca1a1880452d5730bd28f54b0fd30d48e5",
+  "executed_at": "2026-09-03T18:53:03.517906+00:00",
   "manifest": {
-    "dataset_version": "smip-canonical-daily-v1-d00a40487cc73e1d",
+    "dataset_version": "smip-canonical-daily-v1-c948b4391202f7ec",
     "first_session": "2019-01-01",
-    "generated_at": "2026-09-02T18:57:45.184124+00:00",
-    "last_session": "2026-09-02",
+    "generated_at": "2026-09-03T18:34:56.587735+00:00",
+    "last_session": "2026-09-03",
     "leakage_policy_status": "PASS",
     "path": "manifest.json",
-    "row_count": 393420,
-    "sha256": "bc2cdcdc0255c7bc2aef21c52ef33d2c37e99368a166c004f6407e6f3bf9e9cc",
+    "row_count": 393708,
+    "sha256": "e3bb012b7bb8f89fc57ea398f63e89362eccabc122a94e10d2311ad83c55c38c",
     "symbol_count": 289
   },
   "policy": {
@@ -68,11 +68,11 @@
   },
   "receipt_schema_version": "smip-repository-integrity-receipt-v1",
   "reconstruction": {
-    "last_session": "2026-09-02",
+    "last_session": "2026-09-03",
     "line_ending": "LF",
-    "row_count": 393420,
-    "sha256": "c62c06bdc0210a2ce6bff597ebc1f665891494dc658624b8ad005c37de90bcc4",
-    "size_bytes": 55162564,
+    "row_count": 393708,
+    "sha256": "d5ba3245300378e8854c23beb4cc9598dd3ff47daf3388c4f3de35836631e7b3",
+    "size_bytes": 55217721,
     "sort_order": [
       "symbol",
       "date"
@@ -1403,14 +1403,14 @@
       },
       {
         "first_session": "2026-09-01",
-        "last_session": "2026-09-02",
+        "last_session": "2026-09-03",
         "part_count_for_period": 1,
         "part_index": 1,
         "path": "parts/canonical-2026-09.csv",
         "period": "2026-09",
-        "row_count": 576,
-        "sha256": "b593a181eb28021857cbe0ec917bba094b170afc7b403706d245659d019e8de5",
-        "size_bytes": 110544,
+        "row_count": 864,
+        "sha256": "d3568c54074c7f64be2aa5adce5b02047ebebe1a559ff28b93b1edebeceab8ee",
+        "size_bytes": 165701,
         "status": "PASS",
         "symbol_count": 288,
         "url": "https://raw.githubusercontent.com/waleed1971-lab/smip-canonical-data/main/parts/canonical-2026-09.csv"
@@ -1418,14 +1418,14 @@
     ],
     "max_part_size_bytes": 999960,
     "period_count": 93,
-    "total_row_count": 393420
+    "total_row_count": 393708
   },
   "verification_type": "repository-side integrity attestation",
   "workflow": {
     "name": "Repository integrity attestation",
     "ref": "refs/heads/main",
     "run_attempt": "1",
-    "run_id": "33670460728",
-    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33670460728"
+    "run_id": "33793139074",
+    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33793139074"
   }
 }
