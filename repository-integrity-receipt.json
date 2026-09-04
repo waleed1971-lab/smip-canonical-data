@@ -10,15 +10,23 @@
         "25 13 * * 0-4",
         "45 13 * * 0-4",
         "5 14 * * 0-4",
-        "25 14 * * 0-4"
+        "25 14 * * 0-4",
+        "45 18 * * 0-4",
+        "15 19 * * 0-4",
+        "45 19 * * 0-4",
+        "15 20 * * 0-4"
       ],
-      "freshness_deadline_local": "17:45",
+      "freshness_deadline_local": "23:45",
       "scheduled_times_local": [
         "16:05",
         "16:25",
         "16:45",
         "17:05",
-        "17:25"
+        "17:25",
+        "21:45",
+        "22:15",
+        "22:45",
+        "23:15"
       ],
       "timezone": "Asia/Riyadh",
       "trading_days": [
@@ -44,8 +52,8 @@
     "size_bytes": 6794304,
     "status": "PASS"
   },
-  "commit_sha": "98a08cca1a1880452d5730bd28f54b0fd30d48e5",
-  "executed_at": "2026-09-03T18:53:03.517906+00:00",
+  "commit_sha": "aa51a34fdad2fd3a04f26857670329de23c3033b",
+  "executed_at": "2026-09-04T11:12:08.107465+00:00",
   "manifest": {
     "dataset_version": "smip-canonical-daily-v1-c948b4391202f7ec",
     "first_session": "2019-01-01",
@@ -54,7 +62,7 @@
     "leakage_policy_status": "PASS",
     "path": "manifest.json",
     "row_count": 393708,
-    "sha256": "e3bb012b7bb8f89fc57ea398f63e89362eccabc122a94e10d2311ad83c55c38c",
+    "sha256": "1e1f70cd3cf801b9ac25ecf5779f003919b03ed972b4e30d0151009d0d66ac1b",
     "symbol_count": 289
   },
   "policy": {
@@ -1425,7 +1433,7 @@
     "name": "Repository integrity attestation",
     "ref": "refs/heads/main",
     "run_attempt": "1",
-    "run_id": "33793139074",
-    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33793139074"
+    "run_id": "33866798232",
+    "url": "https://github.com/waleed1971-lab/smip-canonical-data/actions/runs/33866798232"
   }
 }
