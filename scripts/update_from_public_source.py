@@ -41,15 +41,29 @@ EXPECTED_SCHEMA = [
     "source_file_sha256",
 ]
 
-SCHEDULED_TIMES_LOCAL = ["16:05", "16:25", "16:45", "17:05", "17:25"]
+SCHEDULED_TIMES_LOCAL = [
+    "16:05",
+    "16:25",
+    "16:45",
+    "17:05",
+    "17:25",
+    "21:45",
+    "22:15",
+    "22:45",
+    "23:15",
+]
 CRON_UTC = [
     "5 13 * * 0-4",
     "25 13 * * 0-4",
     "45 13 * * 0-4",
     "5 14 * * 0-4",
     "25 14 * * 0-4",
+    "45 18 * * 0-4",
+    "15 19 * * 0-4",
+    "45 19 * * 0-4",
+    "15 20 * * 0-4",
 ]
-FRESHNESS_DEADLINE_LOCAL = "17:45"
+FRESHNESS_DEADLINE_LOCAL = "23:45"
 HEX64 = re.compile(r"[0-9a-f]{64}")
 ISO_DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 

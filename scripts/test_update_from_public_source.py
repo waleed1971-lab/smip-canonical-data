@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import gzip
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -60,7 +61,17 @@ class AutomaticUpdateContractTest(unittest.TestCase):
     def test_retry_schedule_is_explicit_and_consistent(self) -> None:
         self.assertEqual(
             SCHEDULED_TIMES_LOCAL,
-            ["16:05", "16:25", "16:45", "17:05", "17:25"],
+            [
+                "16:05",
+                "16:25",
+                "16:45",
+                "17:05",
+                "17:25",
+                "21:45",
+                "22:15",
+                "22:45",
+                "23:15",
+            ],
         )
         self.assertEqual(
             CRON_UTC,
@@ -70,9 +81,29 @@ class AutomaticUpdateContractTest(unittest.TestCase):
                 "45 13 * * 0-4",
                 "5 14 * * 0-4",
                 "25 14 * * 0-4",
+                "45 18 * * 0-4",
+                "15 19 * * 0-4",
+                "45 19 * * 0-4",
+                "15 20 * * 0-4",
             ],
         )
-        self.assertEqual(FRESHNESS_DEADLINE_LOCAL, "17:45")
+        self.assertEqual(FRESHNESS_DEADLINE_LOCAL, "23:45")
+
+    def test_workflow_readme_manifest_and_receipt_match_schedule_contract(self) -> None:
+        repository_root = Path(__file__).resolve().parents[1]
+        workflow = (
+            repository_root / ".github/workflows/automatic-canonical-update.yml"
+        ).read_text(encoding="utf-8")
+        workflow_cron = re.findall(r'^\s+- cron: "([^"]+)"$', workflow, flags=re.MULTILINE)
+        self.assertEqual(workflow_cron, CRON_UTC)
+
+        readme = (repository_root / "README.md").read_text(encoding="utf-8")
+        for local_time in SCHEDULED_TIMES_LOCAL:
+            self.assertIn(local_time, readme)
+        self.assertIn(FRESHNESS_DEADLINE_LOCAL, readme)
+
+        manifest = json.loads((repository_root / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["automatic_update"]["schedule"], expected_schedule())
 
     def test_schedule_only_change_requires_configuration_update(self) -> None:
         manifest = {

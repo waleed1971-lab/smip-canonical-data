@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from scripts.update_from_public_source import expected_schedule
 from scripts.verify_repository_integrity import VerificationError, WorkflowContext, build_receipt, write_receipt_atomic
 
 
@@ -118,12 +119,14 @@ class RepositoryIntegrityReceiptTest(unittest.TestCase):
             "mode": "github-actions-public-pull",
             "source_manifest_url": "https://smip-server.onrender.com/research/manifest.json",
             "source_canonical_url": "https://smip-server.onrender.com/research/canonical-daily.csv.gz",
+            "schedule": expected_schedule(),
             "fail_closed": True,
         }
         (self.root / "manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
         receipt = build_receipt(self.root, self.context)
         self.assertTrue(receipt["policy"]["automatic_update_enabled"])
         self.assertEqual(receipt["automatic_update"]["mode"], "github-actions-public-pull")
+        self.assertEqual(receipt["automatic_update"]["schedule"], expected_schedule())
 
     def test_enabled_automatic_update_without_metadata_fails_closed(self) -> None:
         self.manifest["text_parts_reconstruction"]["automatic_update_enabled"] = True
